@@ -6,6 +6,6 @@ namespace Tours
 {
     public interface ITourRepository : CrudRepository<Tour, int>
     {
-        List<Tour> findTourByDate(DateTime b, DateTime e);
+        List<Tour> FindTourByDate(DateTime b, DateTime e);
     }
 }

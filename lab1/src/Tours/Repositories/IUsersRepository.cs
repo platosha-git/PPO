@@ -6,6 +6,6 @@ namespace Tours
 {
     public interface IUsersRepository : CrudRepository<User, int>
     {
-        List<User> findUsersByAccessLevel(int lvl);
+        List<User> FindUsersByAccessLevel(int lvl);
     }
 }

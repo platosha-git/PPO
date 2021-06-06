@@ -6,9 +6,9 @@ namespace Tours
 {
     public interface IFoodRepository : CrudRepository<Food, int>
     {
-        List<Food> findFoodByCategory(string cat);
-        List<Food> findFoodByVegMenu(bool vm);
-        List<Food> findFoodByChildMenu(bool cm);
-        List<Food> findFoodByBar(bool bar);
+        List<Food> FindFoodByCategory(string cat);
+        List<Food> FindFoodByVegMenu(bool vm);
+        List<Food> FindFoodByChildMenu(bool cm);
+        List<Food> FindFoodByBar(bool bar);
     }
 }
