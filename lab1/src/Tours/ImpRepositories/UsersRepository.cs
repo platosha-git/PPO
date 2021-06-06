@@ -14,44 +14,44 @@ namespace Tours
             db = createDB;
         }
 
-        public List<User> findAll()
+        public List<User> FindAll()
         {
             return db.Users.ToList();
         }
 
-        public User findByID(int id)
+        public User FindByID(int id)
         {
             return db.Users.Find(id);
         }
 
-        public void add(User obj)
+        public void Add(User obj)
         {
             obj.Userid = db.Users.Count() + 1;
             db.Users.Add(obj);
             db.SaveChanges();
         }
 
-        public void update(User obj)
+        public void Update(User obj)
         {
             db.Users.Update(obj);
             db.SaveChanges();
         }
 
-        public void deleteAll()
+        public void DeleteAll()
         {
-            List<User> allUsers = findAll();
+            List<User> allUsers = FindAll();
             db.Users.RemoveRange(allUsers);
             db.SaveChanges();
         }
 
-        public void deleteByID(int id)
+        public void DeleteByID(int id)
         {
-            User user = findByID(id);
+            User user = FindByID(id);
             db.Users.Remove(user);
             db.SaveChanges();
         }
 
-        public List<User> findUsersByAccessLevel(int lvl)
+        public List<User> FindUsersByAccessLevel(int lvl)
         {
             IQueryable<User> users = db.Users.Where(needed => needed.Accesslevel == lvl);
             return users.ToList();

@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Tours.ImpRepositories
+{
+    class PlaneRepository
+    {
+        private readonly ToursContext db;
+
+        public PlaneRepository(ToursContext createDB)
+        {
+            db = createDB;
+        }
+
+        public List<Planeticket> FindAll()
+        {
+            return db.Planetickets.ToList();
+        }
+
+        public Planeticket FindByID(int id)
+        {
+            return db.Planetickets.Find(id);
+        }
+
+        public void Add(Planeticket obj)
+        {
+            obj.Planetid = db.Planetickets.Count() + 1;
+            db.Planetickets.Add(obj);
+            db.SaveChanges();
+        }
+
+        public void Update(Planeticket obj)
+        {
+            db.Planetickets.Update(obj);
+            db.SaveChanges();
+        }
+
+        public void DeleteAll()
+        {
+            List<Planeticket> allPlanetickets = FindAll();
+            db.Planetickets.RemoveRange(allPlanetickets);
+            db.SaveChanges();
+        }
+
+        public void DeleteByID(int id)
+        {
+            Planeticket planeticket = FindByID(id);
+            db.Planetickets.Remove(planeticket);
+            db.SaveChanges();
+        }
+    }
+}

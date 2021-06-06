@@ -14,61 +14,61 @@ namespace Tours
             db = createDB;
         }
 
-        public List<Food> findAll()
+        public List<Food> FindAll()
         {
             return db.Foods.ToList();
         }
 
-        public Food findByID(int id)
+        public Food FindByID(int id)
         {
             return db.Foods.Find(id);
         }
 
-        public void add(Food obj)
+        public void Add(Food obj)
         {
             obj.Foodid = db.Foods.Count() + 1;
             db.Foods.Add(obj);
             db.SaveChanges();
         }
 
-        public void update(Food obj)
+        public void Update(Food obj)
         {
             db.Foods.Update(obj);
             db.SaveChanges();
         }
 
-        public void deleteAll()
+        public void DeleteAll()
         {
-            List<Food> allFoods = findAll();
+            List<Food> allFoods = FindAll();
             db.Foods.RemoveRange(allFoods);
             db.SaveChanges();
         }
 
-        public void deleteByID(int id)
+        public void DeleteByID(int id)
         {
-            Food food = findByID(id);
+            Food food = FindByID(id);
             db.Foods.Remove(food);
             db.SaveChanges();
         }
 
-        public List<Food> findFoodByCategory(string cat)
+        public List<Food> FindFoodByCategory(string cat)
         {
             IQueryable<Food> foods = db.Foods.Where(needed => needed.Category == cat);
             return foods.ToList();
         }
 
-        public List<Food> findFoodByVegMenu(bool vm)
+        public List<Food> FindFoodByVegMenu(bool vm)
         {
             IQueryable<Food> foods = db.Foods.Where(needed => needed.Vegmenu == vm);
             return foods.ToList();
         }
 
-        public List<Food> findFoodByChildMenu(bool cm)
+        public List<Food> FindFoodByChildMenu(bool cm)
         {
             IQueryable<Food> foods = db.Foods.Where(needed => needed.Childrenmenu == cm);
             return foods.ToList();
         }
-        public List<Food> findFoodByBar(bool bar)
+        public List<Food> FindFoodByBar(bool bar)
         {
             IQueryable<Food> foods = db.Foods.Where(needed => needed.Bar == bar);
             return foods.ToList();

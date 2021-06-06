@@ -14,68 +14,68 @@ namespace Tours
             db = createDB;
         }
 
-        public List<Hotel> findAll()
+        public List<Hotel> FindAll()
         {
             return db.Hotels.ToList();
         }
 
-        public Hotel findByID(int id)
+        public Hotel FindByID(int id)
         {
             return db.Hotels.Find(id);
         }
 
-        public void add(Hotel obj)
+        public void Add(Hotel obj)
         {
             obj.Hotelid = db.Hotels.Count() + 1;
             db.Hotels.Add(obj);
             db.SaveChanges();
         }
 
-        public void update(Hotel obj)
+        public void Update(Hotel obj)
         {
             db.Hotels.Update(obj);
             db.SaveChanges();
         }
 
-        public void deleteAll()
+        public void DeleteAll()
         {
-            List<Hotel> allHotels = findAll();
+            List<Hotel> allHotels = FindAll();
             db.Hotels.RemoveRange(allHotels);
             db.SaveChanges();
         }
 
-        public void deleteByID(int id)
+        public void DeleteByID(int id)
         {
-            Hotel hotel = findByID(id);
+            Hotel hotel = FindByID(id);
             db.Hotels.Remove(hotel);
             db.SaveChanges();
         }
 
-        public List<Hotel> findHotelByName(string name)
+        public List<Hotel> FindHotelByName(string name)
         {
             IQueryable<Hotel> hotels = db.Hotels.Where(needed => needed.Name == name);
             return hotels.ToList();
         }
 
-        public List<Hotel> findHotelByType(string type)
+        public List<Hotel> FindHotelByType(string type)
         {
             IQueryable<Hotel> hotels = db.Hotels.Where(needed => needed.Type == type);
             return hotels.ToList();
         }
 
-        public List<Hotel> findHotelByClass(int cls)
+        public List<Hotel> FindHotelByClass(int cls)
         {
             IQueryable<Hotel> hotels = db.Hotels.Where(needed => needed.Class == cls);
             return hotels.ToList();
         }
 
-        public List<Hotel> findHotelBySwimPool(bool sp)
+        public List<Hotel> FindHotelBySwimPool(bool sp)
         {
             IQueryable<Hotel> hotels = db.Hotels.Where(needed => needed.Swimpool == sp);
             return hotels.ToList();
         }
 
-        public List<Hotel> findHotelByLowCost(int cost)
+        public List<Hotel> FindHotelByLowCost(int cost)
         {
             IQueryable<Hotel> hotels = db.Hotels.Where(needed => needed.Cost <= cost);
             return hotels.ToList();
