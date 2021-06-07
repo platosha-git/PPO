@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Tours
 {
-    class BusRepository
+    public class BusRepository : IBusRepository
     {
         private readonly ToursContext db;
 
@@ -49,6 +49,12 @@ namespace Tours
             Busticket busticket = FindByID(id);
             db.Bustickets.Remove(busticket);
             db.SaveChanges();
+        }
+
+        public List<Busticket> FindBusByLowCost(int cost)
+        {
+            IQueryable<Busticket> busTickets = db.Bustickets.Where(needed => needed.Cost <= cost);
+            return busTickets.ToList();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Tours
 {
-    class TrainRepository
+    public class TrainRepository : ITrainRepository
     {
         private readonly ToursContext db;
 
@@ -39,16 +39,22 @@ namespace Tours
 
         public void DeleteAll()
         {
-            List<Trainticket> allTrainticket = FindAll();
-            db.Traintickets.RemoveRange(allTrainticket);
+            List<Trainticket> allTrainTicket = FindAll();
+            db.Traintickets.RemoveRange(allTrainTicket);
             db.SaveChanges();
         }
 
         public void DeleteByID(int id)
         {
-            Trainticket trainticket = FindByID(id);
-            db.Traintickets.Remove(trainticket);
+            Trainticket trainTicket = FindByID(id);
+            db.Traintickets.Remove(trainTicket);
             db.SaveChanges();
+        }
+
+        public List<Trainticket> FindTrainByLowCost(int cost)
+        {
+            IQueryable<Trainticket> trainTickets = db.Traintickets.Where(needed => needed.Cost <= cost);
+            return trainTickets.ToList();
         }
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Tours.ImpRepositories
+namespace Tours
 {
-    class PlaneRepository
+    public class PlaneRepository : IPlaneRepository
     {
         private readonly ToursContext db;
 
@@ -49,6 +49,12 @@ namespace Tours.ImpRepositories
             Planeticket planeticket = FindByID(id);
             db.Planetickets.Remove(planeticket);
             db.SaveChanges();
+        }
+
+        public List<Planeticket> FindPlaneByLowCost(int cost)
+        {
+            IQueryable<Planeticket> planeTickets = db.Planetickets.Where(needed => needed.Cost <= cost);
+            return planeTickets.ToList();
         }
     }
 }
