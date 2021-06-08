@@ -26,7 +26,7 @@ namespace Tours
 
         public void Add(Busticket obj)
         {
-            obj.Bustid = db.Bustickets.Count() + 1;
+            obj.Bustid = db.Bustickets.Count();
             db.Bustickets.Add(obj);
             db.SaveChanges();
         }

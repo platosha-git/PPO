@@ -51,10 +51,10 @@ namespace Tours
             db.SaveChanges();
         }
 
-        public List<Hotel> FindHotelByName(string name)
+        public Hotel FindHotelByName(string name)
         {
-            IQueryable<Hotel> hotels = db.Hotels.Where(needed => needed.Name == name);
-            return hotels.ToList();
+            IQueryable<Hotel> hotel = db.Hotels.Where(needed => needed.Name == name);
+            return hotel.First();
         }
 
         public List<Hotel> FindHotelByType(string type)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Tours
 {
-    class UsersRepository : IUsersRepository
+    public class UsersRepository : IUsersRepository
     {
         private readonly ToursContext db;
 
