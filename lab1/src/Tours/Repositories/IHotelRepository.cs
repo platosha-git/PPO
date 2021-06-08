@@ -6,7 +6,7 @@ namespace Tours
 {
     public interface IHotelRepository : CrudRepository<Hotel, int>
     {
-        List<Hotel> FindHotelByName(string name);
+        Hotel FindHotelByName(string name);
         List<Hotel> FindHotelByType(string type);
         List<Hotel> FindHotelByClass(int cls);
         List<Hotel> FindHotelBySwimPool(bool sp);
