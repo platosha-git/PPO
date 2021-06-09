@@ -46,7 +46,7 @@ namespace Tours
 
         public void DeleteByID(int id)
         {
-            Busticket busticket = FindByID(id);
+            Busticket busticket = FindByID(id - 1);
             db.Bustickets.Remove(busticket);
             db.SaveChanges();
         }

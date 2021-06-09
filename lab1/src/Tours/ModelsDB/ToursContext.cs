@@ -8,8 +8,11 @@ namespace Tours
 {
     public partial class ToursContext : DbContext
     {
-        public ToursContext()
+        private string ConnectionString { get; set; }
+
+        public ToursContext(string conn)
         {
+            ConnectionString = conn;
         }
 
         public ToursContext(DbContextOptions<ToursContext> options)
@@ -33,7 +36,7 @@ namespace Tours
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Tours;Username=postgres;Password=21rfrnec");
+                optionsBuilder.UseNpgsql(ConnectionString);
             }
         }
 
@@ -48,12 +51,11 @@ namespace Tours
 
                 entity.ToTable("booking");
 
-                entity.HasIndex(e => e.Login, "uk_l")
-                    .IsUnique();
-
                 entity.Property(e => e.Customer)
                     .ValueGeneratedNever()
                     .HasColumnName("customer");
+
+                entity.Property(e => e.Accesslevel).HasColumnName("accesslevel");
 
                 entity.Property(e => e.Login)
                     .HasMaxLength(30)
@@ -63,7 +65,13 @@ namespace Tours
                     .HasMaxLength(30)
                     .HasColumnName("password");
 
-                entity.Property(e => e.Tourid).HasColumnName("tourid");
+                entity.Property(e => e.Toursid).HasColumnName("toursid");
+
+                entity.HasOne(d => d.CustomerNavigation)
+                    .WithOne(p => p.Booking)
+                    .HasForeignKey<Booking>(d => d.Customer)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_bu");
             });
 
             modelBuilder.Entity<Busticket>(entity =>
@@ -80,6 +88,8 @@ namespace Tours
                 entity.Property(e => e.Arrivaltime)
                     .HasColumnType("time without time zone")
                     .HasColumnName("arrivaltime");
+
+                entity.Property(e => e.Bus).HasColumnName("bus");
 
                 entity.Property(e => e.Cityfrom).HasColumnName("cityfrom");
 
@@ -345,8 +355,6 @@ namespace Tours
                     .ValueGeneratedNever()
                     .HasColumnName("userid");
 
-                entity.Property(e => e.Accesslevel).HasColumnName("accesslevel");
-
                 entity.Property(e => e.Name)
                     .HasMaxLength(30)
                     .HasColumnName("name");
@@ -356,12 +364,6 @@ namespace Tours
                     .HasColumnName("surname");
 
                 entity.Property(e => e.Year).HasColumnName("year");
-
-                entity.HasOne(d => d.UserNavigation)
-                    .WithOne(p => p.User)
-                    .HasForeignKey<User>(d => d.Userid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_ub");
             });
 
             OnModelCreatingPartial(modelBuilder);

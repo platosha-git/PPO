@@ -13,6 +13,7 @@ namespace Tours
         }
 
         public int Bustid { get; set; }
+        public int? Bus { get; set; }
         public int? Seat { get; set; }
         public int? Cityfrom { get; set; }
         public int? Cityto { get; set; }

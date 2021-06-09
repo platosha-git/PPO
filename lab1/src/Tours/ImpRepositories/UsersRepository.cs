@@ -50,11 +50,5 @@ namespace Tours
             db.Users.Remove(user);
             db.SaveChanges();
         }
-
-        public List<User> FindUsersByAccessLevel(int lvl)
-        {
-            IQueryable<User> users = db.Users.Where(needed => needed.Accesslevel == lvl);
-            return users.ToList();
-        }
     }
 }
