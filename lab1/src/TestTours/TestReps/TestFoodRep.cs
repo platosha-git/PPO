@@ -8,7 +8,7 @@ namespace TestTours
     [TestClass]
     public class TestFoodRep
     {
-        IFoodRepository FoodRep = new FoodRepository(new ToursContext());
+        IFoodRepository FoodRep = new FoodRepository(new ToursContext(ConfigManager.GetConnectionString(2)));
 
         [TestMethod]
         public void TestFindAll()

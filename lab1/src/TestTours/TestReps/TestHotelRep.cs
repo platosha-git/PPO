@@ -8,7 +8,7 @@ namespace TestTours
     [TestClass]
     public class TestHotelRep
     {
-        IHotelRepository HotelRep = new HotelRepository(new ToursContext());
+        IHotelRepository HotelRep = new HotelRepository(new ToursContext(ConfigManager.GetConnectionString(2)));
 
         [TestMethod]
         public void TestFindAll()

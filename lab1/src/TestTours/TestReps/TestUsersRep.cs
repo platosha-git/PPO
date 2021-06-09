@@ -8,7 +8,7 @@ namespace TestTours
     [TestClass]
     public class TestUsersRep
     {
-        IUsersRepository UsersRep = new UsersRepository(new ToursContext());
+        IUsersRepository UsersRep = new UsersRepository(new ToursContext(ConfigManager.GetConnectionString(2)));
 
         [TestMethod]
         public void TestFindAll()
@@ -27,7 +27,7 @@ namespace TestTours
         [TestMethod]
         public void TestAUD()
         {
-            User userA = new User { Userid = 11, Accesslevel = 0, Name = "Ksenia", Surname = "Petrova", Year = 1997 };
+            User userA = new User { Userid = 11, Name = "Ksenia", Surname = "Petrova", Year = 1997 };
             UsersRep.Add(userA);
             User userFA = UsersRep.FindAll().Last();
             Assert.AreEqual(userA, userFA);
@@ -41,13 +41,6 @@ namespace TestTours
             UsersRep.DeleteByID(LastID);
             int NLastID = UsersRep.FindAll().Count();
             Assert.AreEqual(LastID - 1, NLastID);
-        }
-
-        [TestMethod]
-        public void TestFindByAccess()
-        {
-            List<User> users = UsersRep.FindUsersByAccessLevel(0);
-            Assert.IsTrue(users.Count != 0);
         }
     }
 }

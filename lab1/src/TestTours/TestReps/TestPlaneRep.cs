@@ -9,7 +9,7 @@ namespace TestTours
     [TestClass]
     public class TestPlaneRep
     {
-        IPlaneRepository PlaneRep = new PlaneRepository(new ToursContext());
+        IPlaneRepository PlaneRep = new PlaneRepository(new ToursContext(ConfigManager.GetConnectionString(2)));
 
         [TestMethod]
         public void TestFindAll()

@@ -9,11 +9,11 @@ namespace TestTours
     [TestClass]
     public class TestBusRep
     {
-        IBusRepository BusRep = new BusRepository(new ToursContext());
+        IBusRepository BusRep = new BusRepository(new ToursContext(ConfigManager.GetConnectionString(2)));
         
         [TestMethod]
         public void TestFindAll()
-        {   
+        {
             List<Busticket> buses = BusRep.FindAll();
             Assert.IsTrue(buses.Count != 0);
         }

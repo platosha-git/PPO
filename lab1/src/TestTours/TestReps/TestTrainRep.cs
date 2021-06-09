@@ -9,7 +9,7 @@ namespace TestTours
     [TestClass]
     public class TestTrainRep
     {
-        ITrainRepository TrainRep = new TrainRepository(new ToursContext());
+        ITrainRepository TrainRep = new TrainRepository(new ToursContext(ConfigManager.GetConnectionString(2)));
 
         [TestMethod]
         public void TestFindAll()
