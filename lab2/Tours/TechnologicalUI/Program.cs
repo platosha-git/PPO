@@ -12,7 +12,7 @@ namespace TechnologicalUI
         static void Main(string[] args)
         {
             TechnologicalUI ui = new TechnologicalUI();
-            ui.Test();
+            ui.Run();
         }
     }
 
@@ -43,14 +43,14 @@ namespace TechnologicalUI
             manager = new ManagerController(tourRep, hotelRep, foodRep, busRep, planeRep, trainRep, bookingRep, usersRep);
         }
 
-        public void Test()
+        public void Run()
         {
             while (true)
             {
-                Console.WriteLine("0 - Конец тестирования\n" +
-                    "1 - Тестирование гостя\n" +
-                    "2 - Тестирование туриста\n" +
-                    "3 - Тестирование менеджера\n");
+                Console.WriteLine("0 - Выход\n" +
+                    "1 - Роль гостя\n" +
+                    "2 - Роль туриста\n" +
+                    "3 - Роль менеджера\n");
 
                 string testStr = Console.ReadLine();
                 int test = Convert.ToInt32(testStr);
@@ -63,16 +63,16 @@ namespace TechnologicalUI
                 switch(test)
                 {
                     case 1:
-                        TestGuest tGuest = new TestGuest(guest, outAll);
-                        tGuest.Test();
+                        GuestRole tGuest = new GuestRole(guest, outAll);
+                        tGuest.Play();
                         break;
                     case 2:
-                        TestTourist tTourist = new TestTourist(tourist, outAll);
-                        tTourist.Test();
+                        TouristRole tTourist = new TouristRole(tourist, outAll);
+                        tTourist.Play();
                         break;
                     case 3:
-                        TestManager tManager = new TestManager(manager, outAll);
-                        tManager.Test();
+                        ManagerRole tManager = new ManagerRole(manager, outAll);
+                        tManager.Play();
                         break;
                     default:
                         break;
